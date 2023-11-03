@@ -1,20 +1,38 @@
-function Node(value) {
-    this.value = value;
-    this.right = null;
-    this.left = null;
+function TreeNode(value) {
+    return {
+        value,
+        left: null,
+        right: null
+    }
 }
 
 function Tree(array) {
 
-    const _buildTree = () => {
-        // TODO: IMPLEMENT
+    const _sortedArray = [...new Set(array)].sort((a, b) => a - b);
+
+    const _buildTree = (array, start, end) => {
+
+        if (start > end) {
+            return null;
+        }
+
+        let mid = Math.floor((start + end) / 2);
+        const root = TreeNode(array[mid]);
+
+        root.left = _buildTree(array, start, mid - 1);
+        root.right = _buildTree(array, mid + 1, end);
+
+        return root;
     }
 
-    this.root = _buildTree();
+    const root = _buildTree(_sortedArray, 0, _sortedArray.length - 1);
 
     return {
-        get root() {
-            return this.root
-        }
+        root
     }
+}
+
+module.exports = {
+    TreeNode,
+    Tree
 }
