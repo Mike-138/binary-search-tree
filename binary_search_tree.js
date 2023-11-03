@@ -16,7 +16,7 @@ function Tree(array) {
             return null;
         }
 
-        let mid = Math.floor((start + end) / 2);
+        const mid = Math.floor((start + end) / 2);
         const root = TreeNode(array[mid]);
 
         root.left = _buildTree(array, start, mid - 1);
