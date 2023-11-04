@@ -54,7 +54,35 @@ function Tree(array) {
     }
 
     const deleteNode = (value) => {
+        let currentNode = root;
+        let parentNode;
+        let leaf;
 
+        while (currentNode) {
+            if (value < currentNode.value) {
+                parentNode = currentNode;
+                currentNode = currentNode.left;
+                leaf = "left";
+            } else if (value > currentNode.value) {
+                parentNode = currentNode;
+                currentNode = currentNode.right;
+                leaf = "right";
+            // Execute once node has been found
+            } else {
+                // If node is a leaf node
+                if (!currentNode.left && !currentNode.right) {
+                    // TODO
+                // If node has a left and right child
+                } else if (currentNode.left && currentNode.right) {
+                    // TODO
+                // If node only has one child
+                } else {
+                    // TODO
+                }
+            }
+        }
+        // Execute only if node does not exist in tree
+        return root;
     }
 
     return {
