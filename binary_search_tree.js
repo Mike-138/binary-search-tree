@@ -71,13 +71,25 @@ function Tree(array) {
             } else {
                 // If node is a leaf node
                 if (!currentNode.left && !currentNode.right) {
-                    // TODO
+                    parentNode[leaf] = null;
+                    return root;
                 // If node has a left and right child
                 } else if (currentNode.left && currentNode.right) {
-                    // TODO
+                    let replacementNode = currentNode.right;
+                    parentNode = currentNode;
+                    leaf = "right";
+                    while (replacementNode.left) {
+                        parentNode = replacementNode;
+                        replacementNode = replacementNode.left;
+                        leaf = "left";
+                    }
+                    parentNode[leaf] = replacementNode.right;
+                    currentNode.value = replacementNode.value;
+                    return root;
                 // If node only has one child
                 } else {
-                    // TODO
+                    parentNode[leaf] = (currentNode.left) ? currentNode.left : currentNode.right;
+                    return root;
                 }
             }
         }
@@ -89,7 +101,8 @@ function Tree(array) {
         get root() {
             return root;
         },
-        insertNode
+        insertNode,
+        deleteNode
     }
 }
 
