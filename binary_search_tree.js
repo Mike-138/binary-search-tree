@@ -28,7 +28,9 @@ function Tree(array) {
     const root = _buildTree(_sortedArray, 0, _sortedArray.length - 1);
 
     return {
-        root
+        get root() {
+            return root;
+        }
     }
 }
 
