@@ -25,12 +25,39 @@ function Tree(array) {
         return root;
     }
 
-    const root = _buildTree(_sortedArray, 0, _sortedArray.length - 1);
+    let root = _buildTree(_sortedArray, 0, _sortedArray.length - 1);
+
+    const insert = (value) => {
+        if (!root) {
+            root = TreeNode(value);
+            return root;
+        }
+
+        let currentNode = root;
+        let parentNode;
+        let leaf;
+
+        while (currentNode) {
+            parentNode = currentNode;
+            if (value < currentNode.value) {
+                currentNode = currentNode.left;
+                leaf = "left";
+            } else {
+                currentNode = currentNode.right;
+                leaf = "right";
+            }
+        }
+
+        parentNode[leaf] = TreeNode(value);
+
+        return root;
+    }
 
     return {
         get root() {
             return root;
-        }
+        },
+        insert
     }
 }
 
