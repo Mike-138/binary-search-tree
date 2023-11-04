@@ -27,7 +27,7 @@ function Tree(array) {
 
     let root = _buildTree(_sortedArray, 0, _sortedArray.length - 1);
 
-    const insert = (value) => {
+    const insertNode = (value) => {
         if (!root) {
             root = TreeNode(value);
             return root;
@@ -53,11 +53,15 @@ function Tree(array) {
         return root;
     }
 
+    const deleteNode = (value) => {
+
+    }
+
     return {
         get root() {
             return root;
         },
-        insert
+        insertNode
     }
 }
 
