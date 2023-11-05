@@ -27,6 +27,19 @@ function Tree(array) {
 
     let root = _buildTree(_sortedArray, 0, _sortedArray.length - 1);
 
+    const prettyPrint = (node, prefix = "", isLeft = true) => {
+        if (node === null) {
+          return;
+        }
+        if (node.right !== null) {
+          prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+        }
+        console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
+        if (node.left !== null) {
+          prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+        }
+      };
+
     const insertNode = (value) => {
         if (!root) {
             root = TreeNode(value);
@@ -101,6 +114,7 @@ function Tree(array) {
         get root() {
             return root;
         },
+        prettyPrint,
         insertNode,
         deleteNode
     }
