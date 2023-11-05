@@ -64,7 +64,7 @@ function Tree(array) {
         parentNode[leaf] = TreeNode(value);
 
         return root;
-    }
+    };
 
     const deleteNode = (value) => {
         let currentNode = root;
@@ -108,7 +108,22 @@ function Tree(array) {
         }
         // Execute only if node does not exist in tree
         return root;
-    }
+    };
+
+    const findNode = (value) => {
+        let currentNode = root;
+
+        while (currentNode) {
+            if (value < currentNode.value) {
+                currentNode = currentNode.left;
+            } else if (value > currentNode.value) {
+                currentNode = currentNode.right;
+            } else {
+                return currentNode;
+            }
+        }
+        return null;
+    };
 
     return {
         get root() {
@@ -116,7 +131,8 @@ function Tree(array) {
         },
         prettyPrint,
         insertNode,
-        deleteNode
+        deleteNode,
+        findNode
     }
 }
 
