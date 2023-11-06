@@ -125,6 +125,26 @@ function Tree(array) {
         return null;
     };
 
+    const levelOrder = () => {
+        if (!root) {
+            return;
+        }
+
+        let orderedArray = [];
+        let currentNode;
+        let queue = [root];
+        while (queue.length > 0) {
+            console.log(queue);
+            currentNode = queue.shift();
+            console.log(currentNode);
+            if (currentNode.left) queue.push(currentNode.left);
+            if (currentNode.right) queue.push(currentNode.right);
+            orderedArray.push(currentNode.value);
+        }
+
+        return orderedArray;
+    }
+
     return {
         get root() {
             return root;
@@ -132,7 +152,8 @@ function Tree(array) {
         prettyPrint,
         insertNode,
         deleteNode,
-        findNode
+        findNode,
+        levelOrder
     }
 }
 
