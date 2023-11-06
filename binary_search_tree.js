@@ -149,6 +149,70 @@ function Tree(array) {
         return orderedArray;
     }
 
+    // TODO
+    const inOrder = (callback) => {
+        if (!root) {
+            return;
+        }
+
+        let orderedArray = [];
+        let currentNode;
+        let operatedNodeValue;
+        while (queue.length > 0) {
+            if (callback) {
+                operatedNodeValue = callback(currentNode.value);
+                orderedArray.push(operatedNodeValue)
+            } else {
+                orderedArray.push(currentNode.value);
+            }
+        }
+
+        return orderedArray;
+    }
+
+
+    // TODO
+    const preOrder = (callback) => {
+        if (!root) {
+            return;
+        }
+
+        let orderedArray = [];
+        let currentNode;
+        let operatedNodeValue;
+        while (queue.length > 0) {
+            if (callback) {
+                operatedNodeValue = callback(currentNode.value);
+                orderedArray.push(operatedNodeValue)
+            } else {
+                orderedArray.push(currentNode.value);
+            }
+        }
+
+        return orderedArray;
+    }
+
+    // TODO
+    const postOrder = (callback) => {
+        if (!root) {
+            return;
+        }
+
+        let orderedArray = [];
+        let currentNode;
+        let operatedNodeValue;
+        while (queue.length > 0) {
+            if (callback) {
+                operatedNodeValue = callback(currentNode.value);
+                orderedArray.push(operatedNodeValue)
+            } else {
+                orderedArray.push(currentNode.value);
+            }
+        }
+
+        return orderedArray;
+    }
+
     return {
         get root() {
             return root;
@@ -157,7 +221,10 @@ function Tree(array) {
         insertNode,
         deleteNode,
         findNode,
-        levelOrder
+        levelOrder,
+        inOrder,
+        preOrder,
+        postOrder
     }
 }
 
