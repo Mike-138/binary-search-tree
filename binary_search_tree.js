@@ -125,21 +125,25 @@ function Tree(array) {
         return null;
     };
 
-    const levelOrder = () => {
+    const levelOrder = (callback) => {
         if (!root) {
             return;
         }
 
         let orderedArray = [];
         let currentNode;
+        let operatedNodeValue;
         let queue = [root];
         while (queue.length > 0) {
-            console.log(queue);
             currentNode = queue.shift();
-            console.log(currentNode);
             if (currentNode.left) queue.push(currentNode.left);
             if (currentNode.right) queue.push(currentNode.right);
-            orderedArray.push(currentNode.value);
+            if (callback) {
+                operatedNodeValue = callback(currentNode.value);
+                orderedArray.push(operatedNodeValue)
+            } else {
+                orderedArray.push(currentNode.value);
+            }
         }
 
         return orderedArray;
