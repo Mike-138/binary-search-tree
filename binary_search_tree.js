@@ -132,18 +132,12 @@ function Tree(array) {
 
         let orderedArray = [];
         let currentNode;
-        let operatedNodeValue;
         let queue = [root];
         while (queue.length > 0) {
             currentNode = queue.shift();
             if (currentNode.left) queue.push(currentNode.left);
             if (currentNode.right) queue.push(currentNode.right);
-            if (callback) {
-                operatedNodeValue = callback(currentNode.value);
-                orderedArray.push(operatedNodeValue)
-            } else {
-                orderedArray.push(currentNode.value);
-            }
+            (callback) ? orderedArray.push(callback(currentNode.value)) : orderedArray.push(currentNode.value);
         }
 
         return orderedArray;
