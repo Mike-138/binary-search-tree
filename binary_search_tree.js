@@ -150,67 +150,43 @@ function Tree(array) {
     }
 
     // TODO
-    const inOrder = (callback) => {
-        if (!root) {
+    const inOrder = (callback, node = root, array = []) => {
+        if (!node) {
             return;
         }
 
-        let orderedArray = [];
-        let currentNode;
-        let operatedNodeValue;
-        while (queue.length > 0) {
-            if (callback) {
-                operatedNodeValue = callback(currentNode.value);
-                orderedArray.push(operatedNodeValue)
-            } else {
-                orderedArray.push(currentNode.value);
-            }
-        }
+        inOrder(callback, node.left);
+        array.push(node.value);
+        inOrder(callback, node.right);
 
-        return orderedArray;
+        return array;
     }
 
 
     // TODO
-    const preOrder = (callback) => {
-        if (!root) {
+    const preOrder = (callback, node = root, array = []) => {
+        if (!node) {
             return;
         }
 
-        let orderedArray = [];
-        let currentNode;
-        let operatedNodeValue;
-        while (queue.length > 0) {
-            if (callback) {
-                operatedNodeValue = callback(currentNode.value);
-                orderedArray.push(operatedNodeValue)
-            } else {
-                orderedArray.push(currentNode.value);
-            }
-        }
+        array.push(node.value);
+        inOrder(callback, node.left);
+        inOrder(callback, node.right);
 
-        return orderedArray;
+        return array;
     }
 
     // TODO
-    const postOrder = (callback) => {
-        if (!root) {
+    const postOrder = (callback, node = root, array = []) => {
+        if (!node) {
             return;
         }
 
-        let orderedArray = [];
-        let currentNode;
-        let operatedNodeValue;
-        while (queue.length > 0) {
-            if (callback) {
-                operatedNodeValue = callback(currentNode.value);
-                orderedArray.push(operatedNodeValue)
-            } else {
-                orderedArray.push(currentNode.value);
-            }
-        }
+        inOrder(callback, node.left);
+        inOrder(callback, node.right);
+        array.push(node.value);
 
-        return orderedArray;
+        return array;
     }
 
     return {
