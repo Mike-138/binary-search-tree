@@ -46,17 +46,17 @@ function Tree(array) {
             return root;
         }
 
-        let currentNode = root;
+        let node = root;
         let parentNode;
         let leaf;
 
-        while (currentNode) {
-            parentNode = currentNode;
-            if (value < currentNode.value) {
-                currentNode = currentNode.left;
+        while (node) {
+            parentNode = node;
+            if (value < node.value) {
+                node = node.left;
                 leaf = "left";
             } else {
-                currentNode = currentNode.right;
+                node = node.right;
                 leaf = "right";
             }
         }
@@ -67,29 +67,29 @@ function Tree(array) {
     };
 
     const deleteNode = (value) => {
-        let currentNode = root;
+        let node = root;
         let parentNode;
         let leaf;
 
-        while (currentNode) {
-            if (value < currentNode.value) {
-                parentNode = currentNode;
-                currentNode = currentNode.left;
+        while (node) {
+            if (value < node.value) {
+                parentNode = node;
+                node = node.left;
                 leaf = "left";
-            } else if (value > currentNode.value) {
-                parentNode = currentNode;
-                currentNode = currentNode.right;
+            } else if (value > node.value) {
+                parentNode = node;
+                node = node.right;
                 leaf = "right";
             // Execute once node has been found
             } else {
                 // If node is a leaf node
-                if (!currentNode.left && !currentNode.right) {
+                if (!node.left && !node.right) {
                     parentNode[leaf] = null;
                     return root;
                 // If node has a left and right child
-                } else if (currentNode.left && currentNode.right) {
-                    let replacementNode = currentNode.right;
-                    parentNode = currentNode;
+                } else if (node.left && node.right) {
+                    let replacementNode = node.right;
+                    parentNode = node;
                     leaf = "right";
                     while (replacementNode.left) {
                         parentNode = replacementNode;
@@ -97,11 +97,11 @@ function Tree(array) {
                         leaf = "left";
                     }
                     parentNode[leaf] = replacementNode.right;
-                    currentNode.value = replacementNode.value;
+                    node.value = replacementNode.value;
                     return root;
                 // If node only has one child
                 } else {
-                    parentNode[leaf] = (currentNode.left) ? currentNode.left : currentNode.right;
+                    parentNode[leaf] = (node.left) ? node.left : node.right;
                     return root;
                 }
             }
@@ -111,15 +111,15 @@ function Tree(array) {
     };
 
     const findNode = (value) => {
-        let currentNode = root;
+        let node = root;
 
-        while (currentNode) {
-            if (value < currentNode.value) {
-                currentNode = currentNode.left;
-            } else if (value > currentNode.value) {
-                currentNode = currentNode.right;
+        while (node) {
+            if (value < node.value) {
+                node = node.left;
+            } else if (value > node.value) {
+                node = node.right;
             } else {
-                return currentNode;
+                return node;
             }
         }
         return null;
@@ -130,17 +130,17 @@ function Tree(array) {
             return;
         }
 
-        let orderedArray = [];
-        let currentNode;
+        let array = [];
+        let node;
         let queue = [root];
         while (queue.length > 0) {
-            currentNode = queue.shift();
-            if (currentNode.left) queue.push(currentNode.left);
-            if (currentNode.right) queue.push(currentNode.right);
-            (callback) ? orderedArray.push(callback(currentNode.value)) : orderedArray.push(currentNode.value);
+            node = queue.shift();
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+            (callback) ? array.push(callback(node.value)) : array.push(node.value);
         }
 
-        return orderedArray;
+        return array;
     }
 
     const inOrder = (callback, node = root, array = []) => {
@@ -149,7 +149,7 @@ function Tree(array) {
         }
 
         inOrder(callback, node.left, array);
-        array.push(node.value);
+        (callback) ? array.push(callback(node.value)) : array.push(node.value);
         inOrder(callback, node.right, array);
 
         return array;
@@ -160,7 +160,7 @@ function Tree(array) {
             return;
         }
 
-        array.push(node.value);
+        (callback) ? array.push(callback(node.value)) : array.push(node.value);
         inOrder(callback, node.left, array);
         inOrder(callback, node.right, array);
 
@@ -174,7 +174,7 @@ function Tree(array) {
 
         inOrder(callback, node.left, array);
         inOrder(callback, node.right, array);
-        array.push(node.value);
+        (callback) ? array.push(callback(node.value)) : array.push(node.value);
 
         return array;
     }
