@@ -149,41 +149,37 @@ function Tree(array) {
         return orderedArray;
     }
 
-    // TODO
     const inOrder = (callback, node = root, array = []) => {
         if (!node) {
             return;
         }
 
-        inOrder(callback, node.left);
+        inOrder(callback, node.left, array);
         array.push(node.value);
-        inOrder(callback, node.right);
+        inOrder(callback, node.right, array);
 
         return array;
     }
 
-
-    // TODO
     const preOrder = (callback, node = root, array = []) => {
         if (!node) {
             return;
         }
 
         array.push(node.value);
-        inOrder(callback, node.left);
-        inOrder(callback, node.right);
+        inOrder(callback, node.left, array);
+        inOrder(callback, node.right, array);
 
         return array;
     }
 
-    // TODO
     const postOrder = (callback, node = root, array = []) => {
         if (!node) {
             return;
         }
 
-        inOrder(callback, node.left);
-        inOrder(callback, node.right);
+        inOrder(callback, node.left, array);
+        inOrder(callback, node.right, array);
         array.push(node.value);
 
         return array;
