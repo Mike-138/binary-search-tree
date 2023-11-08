@@ -179,6 +179,18 @@ function Tree(array) {
         return array;
     }
 
+    const getHeight = (node = root, height = -1) => {
+        // Return height of -1 if tree is empty
+        if (!node) {
+            return height;
+        }
+
+        const leftHeight = getHeight(node.left, height + 1);
+        const rightHeight = getHeight(node.right, height + 1);
+
+        return Math.max(leftHeight, rightHeight);
+    }
+
     return {
         get root() {
             return root;
@@ -190,7 +202,8 @@ function Tree(array) {
         levelOrder,
         inOrder,
         preOrder,
-        postOrder
+        postOrder,
+        getHeight
     }
 }
 
