@@ -10,7 +10,7 @@ function Tree(array) {
 
     const _sortedArray = [...new Set(array)].sort((a, b) => a - b);
 
-    const _buildTree = (array, start, end) => {
+    const _buildTree = (array, start = 0, end = array.length - 1) => {
 
         if (start > end) {
             return null;
@@ -25,7 +25,7 @@ function Tree(array) {
         return root;
     }
 
-    let root = _buildTree(_sortedArray, 0, _sortedArray.length - 1);
+    let root = _buildTree(_sortedArray);
 
     const prettyPrint = (node, prefix = "", isLeft = true) => {
         if (node === null) {
@@ -217,6 +217,18 @@ function Tree(array) {
         return (heightDifference < 2);
     }
 
+    const rebalance = () => {
+        if (!root) {
+            return;
+        }
+        
+        const array = levelOrder();
+        array.sort((a, b) => a - b);
+        root = _buildTree(array);
+        return root;
+
+    }
+
     return {
         get root() {
             return root;
@@ -231,7 +243,8 @@ function Tree(array) {
         postOrder,
         getHeight,
         getDepth,
-        isBalanced
+        isBalanced,
+        rebalance
     }
 }
 
