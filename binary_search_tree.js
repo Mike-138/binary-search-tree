@@ -206,6 +206,17 @@ function Tree(array) {
         return Math.max(leftDepth, rightDepth);
     }
 
+    const isBalanced = (node = root) => {
+        if (!node) {
+            return;
+        }
+
+        const leftHeight = getHeight(node.left);
+        const rightHeight = getHeight(node.right);
+        const heightDifference = Math.abs(leftHeight - rightHeight);
+        return (heightDifference < 2);
+    }
+
     return {
         get root() {
             return root;
@@ -219,7 +230,8 @@ function Tree(array) {
         preOrder,
         postOrder,
         getHeight,
-        getDepth
+        getDepth,
+        isBalanced
     }
 }
 
