@@ -191,6 +191,21 @@ function Tree(array) {
         return Math.max(leftHeight, rightHeight);
     }
 
+        const getDepth = (node, rootNode = root, depth = 0) => {
+        // Return height of -1 if tree is empty
+        if (!rootNode || !node) {
+            return -1;
+        }
+        if (node === rootNode) {
+            return depth;
+        }
+
+        const leftDepth = getDepth(node, rootNode.left, depth + 1);
+        const rightDepth = getDepth(node, rootNode.right, depth + 1);
+
+        return Math.max(leftDepth, rightDepth);
+    }
+
     return {
         get root() {
             return root;
@@ -203,7 +218,8 @@ function Tree(array) {
         inOrder,
         preOrder,
         postOrder,
-        getHeight
+        getHeight,
+        getDepth
     }
 }
 
