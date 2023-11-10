@@ -222,8 +222,7 @@ function Tree(array) {
             return;
         }
 
-        const array = levelOrder();
-        array.sort((a, b) => a - b);
+        const array = inOrder();
         root = _buildTree(array);
         return root;
 
