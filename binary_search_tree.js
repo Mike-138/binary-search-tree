@@ -27,7 +27,7 @@ function Tree(array) {
 
     let root = _buildTree(_sortedArray);
 
-    const prettyPrint = (node, prefix = "", isLeft = true) => {
+    const prettyPrint = (node = root, prefix = "", isLeft = true) => {
         if (node === null) {
           return;
         }
@@ -221,7 +221,7 @@ function Tree(array) {
         if (!root) {
             return;
         }
-        
+
         const array = levelOrder();
         array.sort((a, b) => a - b);
         root = _buildTree(array);
