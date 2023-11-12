@@ -141,40 +141,64 @@ function Tree(array) {
     return array;
   };
 
-  const inOrder = (callback, node = root, array = []) => {
+  // Private utility methods prevent node and array from being accessed as public method arguments
+  const _inOrderUtil = (callback, node, array) => {
     if (!node) {
       return;
     }
 
-    inOrder(callback, node.left, array);
+    _inOrderUtil(callback, node.left, array);
     callback ? array.push(callback(node.value)) : array.push(node.value);
-    inOrder(callback, node.right, array);
+    _inOrderUtil(callback, node.right, array);
 
     return array;
   };
 
-  const preOrder = (callback, node = root, array = []) => {
+  const inOrder = (callback) => {
+    const node = root;
+    const array = [];
+
+    return _inOrderUtil(callback, node, array);
+  };
+
+  // Private utility methods prevent node and array from being accessed as public method arguments
+  const _preOrderUtil = (callback, node, array) => {
     if (!node) {
       return;
     }
 
     callback ? array.push(callback(node.value)) : array.push(node.value);
-    inOrder(callback, node.left, array);
-    inOrder(callback, node.right, array);
+    _preOrderUtil(callback, node.left, array);
+    _preOrderUtil(callback, node.right, array);
 
     return array;
   };
 
-  const postOrder = (callback, node = root, array = []) => {
+  const preOrder = (callback) => {
+    const node = root;
+    const array = [];
+
+    return _preOrderUtil(callback, node, array);
+  };
+
+  // Private utility methods prevent node and array from being accessed as public method arguments
+  const _postOrderUtil = (callback, node, array) => {
     if (!node) {
       return;
     }
 
-    inOrder(callback, node.left, array);
-    inOrder(callback, node.right, array);
+    _postOrderUtil(callback, node.left, array);
+    _postOrderUtil(callback, node.right, array);
     callback ? array.push(callback(node.value)) : array.push(node.value);
 
     return array;
+  };
+
+  const postOrder = (callback) => {
+    const node = root;
+    const array = [];
+
+    return _postOrderUtil(callback, node, array);
   };
 
   const getHeight = (node = root, height = -1) => {
